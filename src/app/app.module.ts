@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MdButtonModule, MdCheckboxModule, MdTableModule} from '@angular/material';
 
+import { TableDataService } from './services/table-data.service';
+
 import {BasicComponent} from './basic/basic.component';
 
 import { AppComponent } from './app.component';
@@ -20,7 +22,7 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     MdButtonModule, MdCheckboxModule, MdTableModule
   ],
-  providers: [],
+  providers: [TableDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

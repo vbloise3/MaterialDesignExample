@@ -20,6 +20,9 @@ export interface Element {
   symbol: string;
 }
 
+const endpoint = 'http://localhost:3000/tableData/vince';
+// const data2: Element[] = BasicComponent.http.get(endpoint);
+
 const data: Element[] = [
   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
   {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
