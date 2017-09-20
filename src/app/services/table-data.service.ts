@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
-let theElements: Array<string> = ['Hydrogen'];
-let service: string = 'http://localhost:3000/tableData/vince';
+let elements: Array<string> = ['Hydrogen'];
+let service: string = 'http://localhost:3000/elementData/vince';
 
 export interface Element {
   name: string;
@@ -14,18 +15,19 @@ export interface Element {
 @Injectable()
 export class TableDataService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   get() {
-    return theElements;
+    return elements;
   }
 
   add(element) {
-    theElements.push(element);
+    elements.push(element);
+    return this.get();
   }
 
   load() {
-    return this.http.get(service);
+    return this.http.get<Array<Element>>(service);
   }
 
 }

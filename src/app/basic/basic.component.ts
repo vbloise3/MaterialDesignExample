@@ -1,29 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import { TableDataService, Element} from '../services/table-data.service';
+import {getOverloadKey} from 'tslint/lib/rules/adjacentOverloadSignaturesRule';
 
 @Component({
   selector: 'basic-component',
   styleUrls: ['./basic.component.css'],
   templateUrl: './basic.component.html',
 })
-export class BasicComponent {
+export class BasicComponent implements OnInit {
   displayedColumns = ['position', 'name', 'weight', 'symbol'];
   dataSource = new ExampleDataSource();
+  elements: Array<Element>;
+  symbols: Array<string>;
+  data: Element[];
+
+  static getData() {
+    return data;
+  }
+
+  constructor(private service: TableDataService ) {
+      this.symbols = service.get();
+  }
+
+  ngOnInit() {
+    this.service.load().subscribe(elements => this.elements = elements);
+    this.data = this.elements;
+  }
 }
 
-export interface Element {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const endpoint = 'http://localhost:3000/tableData/vince';
+const endpoint = 'http://localhost:3000/elementData/vince';
 // const data2: Element[] = BasicComponent.http.get(endpoint);
 
-const data: Element[] = [
+const data: Element[] = BasicComponent.getData();
+  /*[
   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
   {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
   {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
@@ -43,8 +55,8 @@ const data: Element[] = [
   {position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl'},
   {position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar'},
   {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
-  {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
-];
+  {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca!'},
+];*/
 
 /**
  * Data source to provide what data should be rendered in the table. The observable provided
