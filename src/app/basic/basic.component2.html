@@ -1,0 +1,8 @@
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--12-col" *ngIf="!elements" style="text-align: center;">
+    Loading
+  </div>
+  <div class="mdl-cell mdl-cell--3-col" *ngFor="let element of elements">
+    <summary [element]="element"></summary>
+  </div>
+</div>
