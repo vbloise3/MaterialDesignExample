@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 let elements: Array<Element>;
-let service: string = 'http://localhost:3000/elementData/vince';
+const service = 'http://localhost:3000/elementData/vince';
 
 export interface Element {
   name: string;
@@ -30,10 +29,9 @@ export class TableDataService {
   }
 
   get2(): any {
-
     return this.http.get<Element[]>(service).map( /// <<<=== use `map` here
       (response) => {
-        const data = response; /*.toString() ? response[0].name : [{}];*/
+        const data = response;
         if (data) {
           elements = data;
         }
